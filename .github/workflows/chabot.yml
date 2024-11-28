@@ -1,41 +1,35 @@
-
----
-# This workflow integrates QwietAI preZero with GitHub
+# This workflow integrates Qwiet preZero with GitHub
 # Visit https://docs.shiftleft.io for help
-name: QwietAI_preZero
+name: Qwiet
 
 on:
+  pull_request:
+  workflow_dispatch:
   push:
+    # We recommend triggering a scan when merging to your default branch
+    # as a best practice, especially if you'd like to compare the results
+    # of two scans (e.g., a feature branch against the default branch)
     branches:
       - main
-
+     
 jobs:
-  NextGen-Static-Analysis:
-    runs-on: ubuntu-latest
+  ngsast-build:
+    runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
-    - name: Download QwietAI CLI
+    - uses: actions/checkout@v2
+
+    - name: Download the Qwiet CLI and set permissions
       run: |
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
-    # QwietAI requires Java 1.8. Post the package step override the version
-    - name: Setup Java JDK
-      uses: actions/setup-java@v3
+
+    # Qwiet requires Java 1.8
+    - name: Set up Java
+      uses: actions/setup-java@v1.4.3
       with:
-        distribution: zulu
-        java-version: 11
-    - name: Extract branch name
-      shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-      id: extract_branch
-    # the sl analyze command below supports multilanguage detection/scanning. In addition, the container being used is pointing to Qwiets Registry and should be removed or edited for customers info
+        java-version: 1.8
+
     - name: NextGen Static Analysis
-      #The 1st run example shows how to execute scan with an app name defined, if app name is not added san will automtically be named the repo name. For other options please reference the UserGuide. 
-      #run: ${GITHUB_WORKSPACE}/sl analyze --strict --wait --app Qwiet-Java-GH --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --container 18fgsa/s3-resource
-      run: ${GITHUB_WORKSPACE}/sl analyze --strict --wait --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} 
+      run: ${GITHUB_WORKSPACE}/sl analyze --app ShiftLeftPython --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
-        SHIFTLEFT_API_HOST: www.shiftleft.io
-        SHIFTLEFT_GRPC_TELEMETRY_HOST: telemetry.shiftleft.io:443
-        SHIFTLEFT_GRPC_API_HOST: api.shiftleft.io:443
-
   
