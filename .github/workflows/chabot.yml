@@ -5,8 +5,9 @@
 name: QwietAI_preZero
 
 on:
-  pull_request:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   NextGen-Static-Analysis:
