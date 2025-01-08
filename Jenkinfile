@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/your-username/your-repo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Your build commands here
+               // sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Your test commands here
+               // sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Your deployment commands here
+               // sh 'kubectl apply -f deployment.yaml'
+            }
+        }
+    }
+}
