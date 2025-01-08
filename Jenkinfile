@@ -1,27 +1,11 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
-                //git url: 'https://github.com/bmaity-lg/security-chatbot.git'
-                 echo "hello "
-            }
-        }
-
-        stage('Build') {
-            steps {
-                // Your build commands here
-               // sh 'mvn clean package'
-                echo "hello 1"
-            }
-        }
-
-        stage('Test') {
-            steps {
-                // Your test commands here
-               // sh 'mvn test'
-             echo "hello 2"
+                // Checkout your code from your repository
+                //git 'https://your-repo-url.git'
+                echo "Hello"
             }
         }
         stage('Checkmarx Scan') {
@@ -32,13 +16,23 @@ pipeline {
                 }
             }
         }
-    }
-        stage('Deploy') {
+    stage('Build') {
             steps {
-                // Your deployment commands here
-               // sh 'kubectl apply -f deployment.yaml'
-                 echo "hello 3"
+                echo "BUILD"
             }
+        }
+
+        stage('Test') {
+            steps {
+                 echo "TEST"
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archive the results
+            archiveArtifacts artifacts: '**/CheckmarxReports/*.*', allowEmptyArchive: true
         }
     }
 }
