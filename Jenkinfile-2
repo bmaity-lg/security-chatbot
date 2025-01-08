@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Run Checkmarx scan
-                   checkmarxASTScanner additionalOptions: '', baseAuthUrl: '', branchName: '', checkmarxInstallation: 'CxOne', credentialsId: '', projectName: 'test-pipeline', serverUrl: '', tenantName: ''
+                   checkmarxASTScanner additionalOptions: '', baseAuthUrl: '', branchName: 'main', checkmarxInstallation: 'CxOne', credentialsId: '', projectName: 'security-chatbot', serverUrl: '', tenantName: ''
                 }
             }
         }
