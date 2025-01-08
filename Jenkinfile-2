@@ -12,17 +12,7 @@ pipeline {
             steps {
                 script {
                     // Run Checkmarx scan
-                    checkmarxScan(
-                        serverUrl: 'http://your-checkmarx-server-url',
-                        credentialsId: 'your-credentials-id',
-                        projectName: 'Your Project Name',
-                        teamPath: '\\CxServer\\SP\\Your Team',
-                        preset: 'Default',
-                        scanConfiguration: 'Default Configuration',
-                        isIncremental: false,
-                        isPublic: true,
-                        comment: 'Jenkins Pipeline Scan'
-                    )
+                   checkmarxASTScanner additionalOptions: '', baseAuthUrl: '', branchName: '', checkmarxInstallation: 'CxOne', credentialsId: '', projectName: 'test-pipeline', serverUrl: '', tenantName: ''
                 }
             }
         }
