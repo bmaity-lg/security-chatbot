@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your code from your repository
+                //git 'https://your-repo-url.git'
+                echo "Hello"
+            }
+        }
+        stage('Checkmarx Scan') {
+            steps {
+                script {
+                    // Run Checkmarx scan
+                    checkmarxScan(
+                        serverUrl: 'http://your-checkmarx-server-url',
+                        credentialsId: 'your-credentials-id',
+                        projectName: 'Your Project Name',
+                        teamPath: '\\CxServer\\SP\\Your Team',
+                        preset: 'Default',
+                        scanConfiguration: 'Default Configuration',
+                        isIncremental: false,
+                        isPublic: true,
+                        comment: 'Jenkins Pipeline Scan'
+                    )
+                }
+            }
+        }
+    }
+    post {
+        always {
+            // Archive the results
+            archiveArtifacts artifacts: '**/CheckmarxReports/*.*', allowEmptyArchive: true
+        }
+    }
+}
