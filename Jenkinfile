@@ -24,7 +24,15 @@ pipeline {
              echo "hello 2"
             }
         }
-
+        stage('Checkmarx Scan') {
+            steps {
+                script {
+                    // Run Checkmarx scan
+                   checkmarxASTScanner additionalOptions: '', baseAuthUrl: '', branchName: 'main', checkmarxInstallation: 'CxOne', credentialsId: 'CxOneID', projectName: 'security-chatbot', serverUrl: '', tenantName: ''
+                }
+            }
+        }
+    }
         stage('Deploy') {
             steps {
                 // Your deployment commands here
