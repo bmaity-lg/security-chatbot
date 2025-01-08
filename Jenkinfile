@@ -12,6 +12,7 @@ pipeline {
             steps {
                 // Your build commands here
                // sh 'mvn clean package'
+                echo "hello 1"
             }
         }
 
@@ -19,6 +20,7 @@ pipeline {
             steps {
                 // Your test commands here
                // sh 'mvn test'
+             echo "hello 2"
             }
         }
 
@@ -26,6 +28,7 @@ pipeline {
             steps {
                 // Your deployment commands here
                // sh 'kubectl apply -f deployment.yaml'
+                 echo "hello 3"
             }
         }
     }
