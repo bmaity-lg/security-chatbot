@@ -1,14 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('CHECKOUT') {
             steps {
                 // Checkout your code from your repository
                 //git 'https://your-repo-url.git'
                 echo "Hello"
             }
         }
-        stage('Checkmarx Scan') {
+        stage('CHECKMARX SCAN') {
             steps {
                 script {
                     // Run Checkmarx scan
@@ -26,9 +26,9 @@ pipeline {
                 echo "TEST"
             }
         }
-        stage('DEPLOYMENT') {
+        stage('DEPLOY') {
             steps {
-                 echo "DEPLOYMENT"
+                 echo "DEPLOY"
             }
         }
     }
