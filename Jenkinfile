@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/bmaity-lg/security-chatbot.git'
+                //git url: 'https://github.com/bmaity-lg/security-chatbot.git'
+                 echo "hello "
             }
         }
 
