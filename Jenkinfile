@@ -11,7 +11,7 @@ pipeline {
         stage('CHECKMARX SCAN') {
             steps {
                 script {
-                    // Run Checkmarx scan
+                    // Run Checkmarx scan 
                    checkmarxASTScanner additionalOptions: '', baseAuthUrl: '', branchName: 'main', checkmarxInstallation: 'CxOne', credentialsId: 'CxOneID', projectName: 'security-chatbot', serverUrl: '', tenantName: ''
                 }
             }
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('DEPLOY') {
             steps {
-                 echo "DEPLOY"
+                 echo "DEPLOY to GKE"
             }
         }
     }
