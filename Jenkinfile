@@ -4,7 +4,7 @@ pipeline {
         stage('CHECKOUT') {
             steps {
                 // Checkout your code from your repository
-                //git 'https://your-repo-url.git'
+                //git 'https://my-repo-url.git'
                 echo "Hello"
             }
         }
