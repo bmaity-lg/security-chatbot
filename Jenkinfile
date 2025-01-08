@@ -16,15 +16,19 @@ pipeline {
                 }
             }
         }
-    stage('Build') {
+    stage('BUILD') {
             steps {
                 echo "BUILD"
             }
         }
-
-        stage('Test') {
+   stage('TEST') {
             steps {
-                 echo "TEST"
+                echo "TEST"
+            }
+        }
+        stage('DEPLOYMENT') {
+            steps {
+                 echo "DEPLOYMENT"
             }
         }
     }
